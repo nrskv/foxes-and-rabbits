@@ -108,4 +108,29 @@ abstract public class Animal {
             alive = false;
         }
     }
+
+
+    /**
+     * Generate a number representing the number of births,
+     * if it can breed.
+     *
+     * @return The number of births (may be zero).
+     */
+    protected int breed() {
+        int births = 0;
+        if (canBreed() && getRand().nextDouble() <= getBreedingProbability()) {
+            births = getRand().nextInt(getMaxLitterSize()) + 1;
+        }
+        return births;
+    }
+
+    /**
+     * An animal can breed if it has reached the breeding age.
+     *
+     * @return true if the animal can breed, false otherwise.
+     */
+    private boolean canBreed() {
+        return age >= getBreedingAge();
+    }
+
 }

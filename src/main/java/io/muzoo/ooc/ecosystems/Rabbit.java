@@ -66,29 +66,6 @@ public class Rabbit extends Animal{
         }
     }
 
-    /**
-     * Generate a number representing the number of births,
-     * if it can breed.
-     *
-     * @return The number of births (may be zero).
-     */
-    private int breed() {
-        int births = 0;
-        if (canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
-            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
-        }
-        return births;
-    }
-
-    /**
-     * A rabbit can breed if it has reached the breeding age.
-     *
-     * @return true if the rabbit can breed, false otherwise.
-     */
-    private boolean canBreed() {
-        return getAge() >= getBreedingAge();
-    }
-
     @Override
     public int getBreedingAge() {
         return BREEDING_AGE;
