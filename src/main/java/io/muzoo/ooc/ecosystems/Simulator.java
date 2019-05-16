@@ -104,6 +104,9 @@ public class Simulator {
         for (Iterator<Animal> iter = animals.iterator(); iter.hasNext(); ) {
             Animal animal = iter.next();
             animal.act(field, updatedField, newAnimals);
+            if(! animal.isAlive()) {
+                iter.remove();
+            }
         }
         // add new born animals to the list of animals
         animals.addAll(newAnimals);
