@@ -7,6 +7,10 @@ abstract public class Animal {
     // The animal's location;
     private Location location;
 
+    public Animal(Location location){
+        setLocation(location);
+    }
+
     /**
      * Get the animal's location.
      * @return The animal's location.

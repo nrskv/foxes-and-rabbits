@@ -45,7 +45,8 @@ public class Fox extends Animal{
      *
      * @param randomAge If true, the fox will have random age and hunger level.
      */
-    public Fox(boolean randomAge) {
+    public Fox(Location location, boolean randomAge) {
+        super(location);
         age = 0;
         alive = true;
         if (randomAge) {
@@ -73,9 +74,9 @@ public class Fox extends Animal{
             // New foxes are born into adjacent locations.
             int births = breed();
             for (int b = 0; b < births; b++) {
-                Fox newFox = new Fox(false);
-                newFoxes.add(newFox);
                 Location loc = updatedField.randomAdjacentLocation(location);
+                Fox newFox = new Fox(loc,false);
+                newFoxes.add(newFox);
                 newFox.setLocation(loc);
                 updatedField.place(newFox, loc);
             }
