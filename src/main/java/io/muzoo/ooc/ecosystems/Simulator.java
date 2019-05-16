@@ -22,9 +22,11 @@ public class Simulator {
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 50;
     // The probability that a fox will be created in any given grid position.
-    private static final double FOX_CREATION_PROBABILITY = 0.02;
+    private static final double FOX_CREATION_PROBABILITY = 0.03;
     // The probability that a rabbit will be created in any given grid position.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.08;
+    private static final double RABBIT_CREATION_PROBABILITY = 0.09;
+    // The probability that a tiger will be created in any given grid position.
+    private static final double TIGER_CREATION_PROBABILITY = 0.01;
 
     // The list of animals in the field
     private List<Animal> animals;
@@ -66,8 +68,9 @@ public class Simulator {
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
-        view.setColor(Fox.class, Color.blue);
-        view.setColor(Rabbit.class, Color.orange);
+        view.setColor(Fox.class, Color.orange);
+        view.setColor(Rabbit.class, Color.pink);
+        view.setColor(Tiger.class, Color.red);
 
         // Setup a valid starting point.
         reset();
@@ -145,7 +148,11 @@ public class Simulator {
         field.clear();
         for (int row = 0; row < field.getDepth(); row++) {
             for (int col = 0; col < field.getWidth(); col++) {
-                if (rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
+                if (rand.nextDouble() <= TIGER_CREATION_PROBABILITY){
+                    Tiger tiger = new Tiger(new Location(row, col), true);
+                    animals.add(tiger);
+                    field.place(tiger, row, col);
+                } else if (rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
                     Fox fox = new Fox(new Location(row, col), true);
                     animals.add(fox);
                     field.place(fox, row, col);

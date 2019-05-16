@@ -12,7 +12,7 @@ public class Tiger extends Animal{
     // The age to which a tiger can live.
     private static final int MAX_AGE = 175;
     // The likelihood of a tiger breeding.
-    private static final double BREEDING_PROBABILITY = 0.05;
+    private static final double BREEDING_PROBABILITY = 0.03;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 3;
     // The food value of a single rabbit. In effect, this is the
@@ -84,12 +84,18 @@ public class Tiger extends Animal{
      * @return Where food was found, or null if it wasn't.
      */
     private Location findFood(Field field, Location location) {
-        Iterator adjacentLocations =
-                field.adjacentLocations(location);
+        Iterator adjacentLocations = field.adjacentLocations(location);
         while (adjacentLocations.hasNext()) {
             Location where = (Location) adjacentLocations.next();
             Object animal = field.getObjectAt(where);
-            if (animal instanceof Rabbit) {
+            if (animal instanceof Fox) {
+                Fox fox = (Fox) animal;
+                if (fox.isAlive()) {
+                    fox.setDead();
+                    foodLevel = FOX_FOOD_VALUE;
+                    return where;
+                }
+            } else if (animal instanceof Rabbit) {
                 Rabbit rabbit = (Rabbit) animal;
                 if (rabbit.isAlive()) {
                     rabbit.setDead();
