@@ -32,8 +32,6 @@ public class Fox extends Animal{
 
     // The fox's age.
     private int age;
-    // Whether the fox is alive or not.
-    private boolean alive;
     // The fox's food level, which is increased by eating rabbits.
     private int foodLevel;
 
@@ -46,7 +44,6 @@ public class Fox extends Animal{
     public Fox(Location location, boolean randomAge) {
         super(location);
         age = 0;
-        alive = true;
         if (randomAge) {
             age = rand.nextInt(MAX_AGE);
             foodLevel = rand.nextInt(RABBIT_FOOD_VALUE);
@@ -68,7 +65,7 @@ public class Fox extends Animal{
     public void hunt(Field currentField, Field updatedField, List newFoxes) {
         incrementAge();
         incrementHunger();
-        if (alive) {
+        if (isAlive()) {
             // New foxes are born into adjacent locations.
             int births = breed();
             for (int b = 0; b < births; b++) {
@@ -88,7 +85,7 @@ public class Fox extends Animal{
                 updatedField.place(this, newLocation);
             } else {
                 // can neither move nor stay - overcrowding - all locations taken
-                alive = false;
+                setDead();
             }
         }
     }
@@ -99,7 +96,7 @@ public class Fox extends Animal{
     private void incrementAge() {
         age++;
         if (age > MAX_AGE) {
-            alive = false;
+            setDead();
         }
     }
 
@@ -109,7 +106,7 @@ public class Fox extends Animal{
     private void incrementHunger() {
         foodLevel--;
         if (foodLevel <= 0) {
-            alive = false;
+            setDead();
         }
     }
 
@@ -159,12 +156,4 @@ public class Fox extends Animal{
         return age >= BREEDING_AGE;
     }
 
-    /**
-     * Check whether the fox is alive or not.
-     *
-     * @return True if the fox is still alive.
-     */
-    public boolean isAlive() {
-        return alive;
-    }
 }
