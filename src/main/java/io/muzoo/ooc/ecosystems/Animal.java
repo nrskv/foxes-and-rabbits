@@ -32,9 +32,9 @@ abstract public class Animal {
      * This is what the animal do most of the time
      * @param currentField The field currently occupied
      * @param updatedField The field to transfer to
-     * @param Animals A list to add newly born animals to
+     * @param newAnimals A list to add newly born animals to
      */
-    public abstract void act(Field currentField, Field updatedField, List<Animal> Animals);
+    public abstract void act(Field currentField, Field updatedField, List<Animal> newAnimals);
 
 
     // The getters and setters of the instance fields
