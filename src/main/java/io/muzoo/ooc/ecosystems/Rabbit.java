@@ -53,9 +53,14 @@ public class Rabbit extends Animal{
                 newRabbits.add(newRabbit);
                 updatedField.place(newRabbit, loc);
             }
-            Location newLocation = updatedField.freeAdjacentLocation(getLocation());
+            Location newLocation = findNewLocation(currentField, updatedField);
             move(updatedField, newLocation);
         }
+    }
+
+    @Override
+    protected Location findNewLocation(Field currentField, Field updatedField) {
+        return updatedField.freeAdjacentLocation(getLocation());
     }
 
     @Override

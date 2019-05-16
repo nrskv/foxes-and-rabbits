@@ -71,10 +71,7 @@ public class Fox extends Animal{
                 updatedField.place(newFox, loc);
             }
             // Move towards the source of food if found.
-            Location newLocation = findFood(currentField, getLocation());
-            if (newLocation == null) {  // no food found - move randomly
-                newLocation = updatedField.freeAdjacentLocation(getLocation());
-            }
+            Location newLocation = findNewLocation(currentField, updatedField);
             move(updatedField, newLocation);
         }
     }
@@ -112,6 +109,15 @@ public class Fox extends Animal{
             }
         }
         return null;
+    }
+
+    @Override
+    protected Location findNewLocation(Field currentField, Field updatedField) {
+        Location newLocation = findFood(currentField, getLocation());
+        if (newLocation == null) {  // no food found - move randomly
+            newLocation = updatedField.freeAdjacentLocation(getLocation());
+        }
+        return newLocation;
     }
 
     @Override

@@ -135,6 +135,8 @@ abstract public class Animal {
 
     // What do animal do?
 
+    abstract protected Location findNewLocation(Field currentField, Field updatedField);
+
     /**
      * Move the animal to new location.
      * @param updatedField The field to transfer to.
