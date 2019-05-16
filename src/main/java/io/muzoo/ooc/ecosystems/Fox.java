@@ -156,4 +156,29 @@ public class Fox extends Animal{
         return age >= BREEDING_AGE;
     }
 
+    @Override
+    public int getBreedingAge() {
+        return BREEDING_AGE;
+    }
+
+    @Override
+    public int getMaxAge() {
+        return MAX_AGE;
+    }
+
+    @Override
+    public double getBreedingProbability() {
+        return BREEDING_PROBABILITY;
+    }
+
+    @Override
+    public int getMaxLitterSize() {
+        return MAX_LITTER_SIZE;
+    }
+
+    @Override
+    public Random getRand() {
+        return rand;
+    }
+
 }

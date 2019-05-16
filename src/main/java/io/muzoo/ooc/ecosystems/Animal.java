@@ -1,5 +1,7 @@
 package io.muzoo.ooc.ecosystems;
 
+import java.util.Random;
+
 abstract public class Animal {
 
     // Individual characteristics (instance fields).
@@ -65,4 +67,12 @@ abstract public class Animal {
     protected void setAge(int age) {
         this.age = age;
     }
+
+    // Getter of the animal's static field
+
+    abstract protected int getBreedingAge();
+    abstract protected int getMaxAge();
+    abstract protected double getBreedingProbability();
+    abstract protected int getMaxLitterSize();
+    abstract protected Random getRand();
 }
