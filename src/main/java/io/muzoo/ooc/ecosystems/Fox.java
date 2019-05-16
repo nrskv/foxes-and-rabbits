@@ -153,7 +153,7 @@ public class Fox extends Animal{
      * A fox can breed if it has reached the breeding age.
      */
     private boolean canBreed() {
-        return age >= BREEDING_AGE;
+        return age >= getBreedingAge();
     }
 
     @Override

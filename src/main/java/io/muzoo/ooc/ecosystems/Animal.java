@@ -13,11 +13,18 @@ abstract public class Animal {
     // The animal's age.
     private int age;
 
+    /**
+     * Create a new animal. An animal may be created with age
+     * zero (a new born) or with a random age.
+     * @param location The location of the animal.
+     */
     public Animal(Location location){
         setLocation(location);
         alive = true;
         age = 0;
     }
+
+    // The getters and setters of the instance fields
 
     /**
      * Get the animal's location.
@@ -75,4 +82,6 @@ abstract public class Animal {
     abstract protected double getBreedingProbability();
     abstract protected int getMaxLitterSize();
     abstract protected Random getRand();
+
+    // Methods that involve the animal's static field
 }
