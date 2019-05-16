@@ -41,18 +41,12 @@ public class Rabbit extends Animal{
      * around. Sometimes it will breed or die of old age.
      *
      * @param updatedField The field to transfer to.
-     * @param newRabbits   A list to add newly born rabbits to.
+     * @param newAnimals   A list to add newly born rabbits to.
      */
-    public void act(Field currentField, Field updatedField, List newRabbits) {
+    public void act(Field currentField, Field updatedField, List<Animal> newAnimals) {
         incrementAge();
         if (isAlive()) {
-            int births = breed();
-            for (int b = 0; b < births; b++) {
-                Location loc = updatedField.randomAdjacentLocation(getLocation());
-                Rabbit newRabbit = new Rabbit(loc,false);
-                newRabbits.add(newRabbit);
-                updatedField.place(newRabbit, loc);
-            }
+            giveBirth(updatedField, newAnimals);
             Location newLocation = findNewLocation(currentField, updatedField);
             move(updatedField, newLocation);
         }
@@ -86,5 +80,9 @@ public class Rabbit extends Animal{
     @Override
     public Random getRand() {
         return rand;
+    }
+
+    public Animal getNewBornAnimal(Location location) {
+        return new Rabbit(location, false);
     }
 }

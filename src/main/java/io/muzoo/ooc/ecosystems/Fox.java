@@ -56,20 +56,14 @@ public class Fox extends Animal{
      *
      * @param currentField The field currently occupied.
      * @param updatedField The field to transfer to.
-     * @param newFoxes     A list to add newly born foxes to.
+     * @param newAnimals     A list to add newly born foxes to.
      */
-    public void act(Field currentField, Field updatedField, List newFoxes) {
+    public void act(Field currentField, Field updatedField, List<Animal> newAnimals) {
         incrementAge();
         incrementHunger();
         if (isAlive()) {
             // New foxes are born into adjacent locations.
-            int births = breed();
-            for (int b = 0; b < births; b++) {
-                Location loc = updatedField.randomAdjacentLocation(getLocation());
-                Fox newFox = new Fox(loc,false);
-                newFoxes.add(newFox);
-                updatedField.place(newFox, loc);
-            }
+            giveBirth(updatedField, newAnimals);
             // Move towards the source of food if found.
             Location newLocation = findNewLocation(currentField, updatedField);
             move(updatedField, newLocation);
@@ -143,6 +137,10 @@ public class Fox extends Animal{
     @Override
     public Random getRand() {
         return rand;
+    }
+
+    public Animal getNewBornAnimal(Location location) {
+        return new Fox(location, false);
     }
 
 }

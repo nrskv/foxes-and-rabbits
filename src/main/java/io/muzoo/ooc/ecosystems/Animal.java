@@ -34,7 +34,7 @@ abstract public class Animal {
      * @param updatedField The field to transfer to
      * @param Animals A list to add newly born animals to
      */
-    public abstract void act(Field currentField, Field updatedField, List Animals);
+    public abstract void act(Field currentField, Field updatedField, List<Animal> Animals);
 
 
     // The getters and setters of the instance fields
@@ -96,6 +96,8 @@ abstract public class Animal {
     abstract protected int getMaxLitterSize();
     abstract protected Random getRand();
 
+    abstract protected Animal getNewBornAnimal(Location location);
+
     // Methods that involve the animal's static field
 
     /**
@@ -150,6 +152,16 @@ abstract public class Animal {
         } else {
             // can neither move nor stay - overcrowding - all locations taken
             alive = false;
+        }
+    }
+
+    protected void giveBirth(Field updatedField, List<Animal> newAnimals) {
+        int births = breed();
+        for (int b = 0; b < births; b++) {
+            Location loc = updatedField.randomAdjacentLocation(location);
+            Animal newAnimal = getNewBornAnimal(loc);
+            newAnimals.add(newAnimal);
+            updatedField.place(newAnimal, loc);
         }
     }
 
