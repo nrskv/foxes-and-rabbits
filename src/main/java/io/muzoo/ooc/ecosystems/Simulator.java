@@ -105,10 +105,10 @@ public class Simulator {
             Object animal = iter.next();
             if (animal instanceof Rabbit) {
                 Rabbit rabbit = (Rabbit) animal;
-                rabbit.run(updatedField, newAnimals);
+                rabbit.act(field, updatedField, newAnimals);
             } else if (animal instanceof Fox) {
                 Fox fox = (Fox) animal;
-                fox.hunt(field, updatedField, newAnimals);
+                fox.act(field, updatedField, newAnimals);
             } else {
                 System.out.println("found unknown animal");
             }
