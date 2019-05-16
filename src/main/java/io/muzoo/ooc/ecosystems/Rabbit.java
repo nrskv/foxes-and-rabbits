@@ -54,14 +54,7 @@ public class Rabbit extends Animal{
                 updatedField.place(newRabbit, loc);
             }
             Location newLocation = updatedField.freeAdjacentLocation(getLocation());
-            // Only transfer to the updated field if there was a free location
-            if (newLocation != null) {
-                setLocation(newLocation);
-                updatedField.place(this, newLocation);
-            } else {
-                // can neither move nor stay - overcrowding - all locations taken
-                setDead();
-            }
+            move(updatedField, newLocation);
         }
     }
 

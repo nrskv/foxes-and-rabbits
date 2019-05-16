@@ -133,4 +133,22 @@ abstract public class Animal {
         return age >= getBreedingAge();
     }
 
+    // What do animal do?
+
+    /**
+     * Move the animal to new location.
+     * @param updatedField The field to transfer to.
+     * @param newLocation The new location.
+     */
+    protected void move(Field updatedField, Location newLocation){
+        // Only transfer to the updated field if there was a free location
+        if (newLocation != null) {
+            location = newLocation;
+            updatedField.place(this, newLocation);
+        } else {
+            // can neither move nor stay - overcrowding - all locations taken
+            alive = false;
+        }
+    }
+
 }

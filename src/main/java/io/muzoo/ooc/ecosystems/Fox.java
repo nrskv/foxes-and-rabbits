@@ -75,13 +75,7 @@ public class Fox extends Animal{
             if (newLocation == null) {  // no food found - move randomly
                 newLocation = updatedField.freeAdjacentLocation(getLocation());
             }
-            if (newLocation != null) {
-                setLocation(newLocation);
-                updatedField.place(this, newLocation);
-            } else {
-                // can neither move nor stay - overcrowding - all locations taken
-                setDead();
-            }
+            move(updatedField, newLocation);
         }
     }
 
