@@ -28,8 +28,6 @@ public class Rabbit extends Animal{
 
     // The rabbit's age.
     private int age;
-    // Whether the rabbit is alive or not.
-    private boolean alive;
 
     /**
      * Create a new rabbit. A rabbit may be created with age
@@ -40,7 +38,6 @@ public class Rabbit extends Animal{
     public Rabbit(Location location, boolean randomAge) {
         super(location);
         age = 0;
-        alive = true;
         if (randomAge) {
             age = rand.nextInt(MAX_AGE);
         }
@@ -55,7 +52,7 @@ public class Rabbit extends Animal{
      */
     public void run(Field updatedField, List newRabbits) {
         incrementAge();
-        if (alive) {
+        if (isAlive()) {
             int births = breed();
             for (int b = 0; b < births; b++) {
                 Location loc = updatedField.randomAdjacentLocation(getLocation());
@@ -71,7 +68,7 @@ public class Rabbit extends Animal{
                 updatedField.place(this, newLocation);
             } else {
                 // can neither move nor stay - overcrowding - all locations taken
-                alive = false;
+                setDead();
             }
         }
     }
@@ -83,7 +80,7 @@ public class Rabbit extends Animal{
     private void incrementAge() {
         age++;
         if (age > MAX_AGE) {
-            alive = false;
+            setDead();
         }
     }
 
@@ -108,22 +105,6 @@ public class Rabbit extends Animal{
      */
     private boolean canBreed() {
         return age >= BREEDING_AGE;
-    }
-
-    /**
-     * Check whether the rabbit is alive or not.
-     *
-     * @return true if the rabbit is still alive.
-     */
-    public boolean isAlive() {
-        return alive;
-    }
-
-    /**
-     * Tell the rabbit that it's dead now :(
-     */
-    public void setEaten() {
-        alive = false;
     }
 
 }
