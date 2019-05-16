@@ -97,4 +97,15 @@ abstract public class Animal {
     abstract protected Random getRand();
 
     // Methods that involve the animal's static field
+
+    /**
+     * Increase the age.
+     * This could result in the animal's death.
+     */
+    protected void incrementAge() {
+        age++;
+        if (getAge() > getMaxAge()) {
+            alive = false;
+        }
+    }
 }
