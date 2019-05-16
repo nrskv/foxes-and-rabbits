@@ -18,10 +18,13 @@ abstract public class Animal {
      * zero (a new born) or with a random age.
      * @param location The location of the animal.
      */
-    public Animal(Location location){
+    public Animal(Location location, boolean randomAge){
         setLocation(location);
         alive = true;
         age = 0;
+        if (randomAge) {
+            age = getRand().nextInt(getMaxAge());
+        }
     }
 
     // The getters and setters of the instance fields

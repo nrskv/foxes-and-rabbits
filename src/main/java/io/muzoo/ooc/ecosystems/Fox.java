@@ -40,9 +40,8 @@ public class Fox extends Animal{
      * @param randomAge If true, the fox will have random age and hunger level.
      */
     public Fox(Location location, boolean randomAge) {
-        super(location);
+        super(location, randomAge);
         if (randomAge) {
-            setAge(rand.nextInt(MAX_AGE));
             foodLevel = rand.nextInt(RABBIT_FOOD_VALUE);
         } else {
             // leave age at 0

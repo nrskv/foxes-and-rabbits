@@ -33,10 +33,7 @@ public class Rabbit extends Animal{
      * @param randomAge If true, the rabbit will have a random age.
      */
     public Rabbit(Location location, boolean randomAge) {
-        super(location);
-        if (randomAge) {
-            setAge(rand.nextInt(MAX_AGE));
-        }
+        super(location, randomAge);
     }
 
     /**
