@@ -8,10 +8,13 @@ abstract public class Animal {
     private Location location;
     // Whether the animal is alive or not.
     private boolean alive;
+    // The animal's age.
+    private int age;
 
     public Animal(Location location){
         setLocation(location);
         alive = true;
+        age = 0;
     }
 
     /**
@@ -45,5 +48,21 @@ abstract public class Animal {
      */
     protected void setDead(){
         alive = false;
+    }
+
+    /**
+     *  Get the animal's age.
+     * @return The animal's age.
+     */
+    protected int getAge() {
+        return age;
+    }
+
+    /**
+     * Set the animal's age.
+     * @param age The age of the animal.
+     */
+    protected void setAge(int age) {
+        this.age = age;
     }
 }
