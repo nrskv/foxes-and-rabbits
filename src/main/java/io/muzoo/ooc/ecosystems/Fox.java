@@ -68,7 +68,6 @@ public class Fox extends Animal{
                 Location loc = updatedField.randomAdjacentLocation(getLocation());
                 Fox newFox = new Fox(loc,false);
                 newFoxes.add(newFox);
-                newFox.setLocation(loc);
                 updatedField.place(newFox, loc);
             }
             // Move towards the source of food if found.

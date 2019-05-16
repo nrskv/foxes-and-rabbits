@@ -51,7 +51,6 @@ public class Rabbit extends Animal{
                 Location loc = updatedField.randomAdjacentLocation(getLocation());
                 Rabbit newRabbit = new Rabbit(loc,false);
                 newRabbits.add(newRabbit);
-                newRabbit.setLocation(loc);
                 updatedField.place(newRabbit, loc);
             }
             Location newLocation = updatedField.freeAdjacentLocation(getLocation());
