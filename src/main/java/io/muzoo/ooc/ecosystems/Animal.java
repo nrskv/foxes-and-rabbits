@@ -6,9 +6,12 @@ abstract public class Animal {
 
     // The animal's location;
     private Location location;
+    // Whether the animal is alive or not.
+    private boolean alive;
 
     public Animal(Location location){
         setLocation(location);
+        alive = true;
     }
 
     /**
@@ -26,5 +29,21 @@ abstract public class Animal {
      */
     protected void setLocation(Location location){
         this.location = location;
+    }
+
+    /**
+     * Check whether the animal is alive or not.
+     *
+     * @return true if the animal is still alive.
+     */
+    protected boolean isAlive() {
+        return alive;
+    }
+
+    /**
+     * Tell the animal that it's dead
+     */
+    protected void setDead(){
+        alive = false;
     }
 }
