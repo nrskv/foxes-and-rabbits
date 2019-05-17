@@ -35,15 +35,6 @@ abstract public class Animal extends Actor {
         return age;
     }
 
-    /**
-     * Set the animal's age.
-     *
-     * @param age The age of the animal.
-     */
-    protected void setAge(int age) {
-        this.age = age;
-    }
-
     // Getter of the animal's static field
 
     abstract protected int getBreedingAge();

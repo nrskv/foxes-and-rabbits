@@ -82,14 +82,6 @@ abstract public class Predator extends Animal{
         }
     }
 
-    protected int getFoodLevel(){
-        return foodLevel;
-    }
-
-    protected void setFoodLevel(int foodLevel) {
-        this.foodLevel = foodLevel;
-    }
-
     abstract protected Class[] getPreys();
     abstract protected HashMap<Class, Integer> getFoodValueMap();
 
