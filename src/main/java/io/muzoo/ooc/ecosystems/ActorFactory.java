@@ -3,11 +3,11 @@ package io.muzoo.ooc.ecosystems;
 public class ActorFactory {
 
     // The probability that a fox will be created in any given grid position.
-    private static final double FOX_CREATION_PROBABILITY = 0.03;
+    private static final double FOX_CREATION_PROBABILITY = 0.04;
     // The probability that a rabbit will be created in any given grid position.
     private static final double RABBIT_CREATION_PROBABILITY = 0.09;
     // The probability that a tiger will be created in any given grid position.
-    private static final double TIGER_CREATION_PROBABILITY = 0.01;
+    private static final double TIGER_CREATION_PROBABILITY = 0.02;
     // The probability that a hunter will be created in any given grid position.
     private static final double HUNTER_CREATION_PROBABILITY = 0.003;
 
