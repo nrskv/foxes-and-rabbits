@@ -22,10 +22,6 @@ public class Simulator {
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 50;
 
-    // The probability that a hunter will be created in any given grid position.
-    private static final double HUNTER_CREATION_PROBABILITY = 0.005;
-
-
     // The list of actors in the field
     private List actors;
     // The list of actors just born
@@ -39,8 +35,8 @@ public class Simulator {
     // A graphical view of the simulation.
     private SimulatorView view;
 
-    // The animal factory
-    private AnimalFactory animalFactory;
+    // The actor factory
+    private ActorFactory actorFactory;
 
     /**
      * Construct a simulation field with default size.
@@ -66,7 +62,7 @@ public class Simulator {
         newActors = new ArrayList();
         field = new Field(depth, width);
         updatedField = new Field(depth, width);
-        animalFactory = new AnimalFactory();
+        actorFactory = new ActorFactory();
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
@@ -153,12 +149,7 @@ public class Simulator {
             for (int col = 0; col < field.getWidth(); col++) {
                 double creationProbability = rand.nextDouble();
                 Location loc = new Location(row, col);
-                Actor newActor = null;
-                if (creationProbability <= HUNTER_CREATION_PROBABILITY) {
-                    newActor = new Hunter(loc);
-                } else {
-                    newActor = animalFactory.spawnAnimal(creationProbability, loc);
-                }
+                Actor newActor = actorFactory.spawnActor(creationProbability, loc);
                 if (newActor != null) {
                     actors.add(newActor);
                     field.place(newActor, row, col);
