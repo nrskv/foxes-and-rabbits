@@ -39,4 +39,6 @@ abstract public class Predator extends Animal{
         this.foodLevel = foodLevel;
     }
 
+    abstract protected Class[] getPreys();
+
 }

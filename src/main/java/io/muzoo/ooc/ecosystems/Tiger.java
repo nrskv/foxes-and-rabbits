@@ -128,4 +128,9 @@ public class Tiger extends Predator{
     protected Animal getNewBornAnimal(Location location) {
         return new Tiger(location, false);
     }
+
+    @Override
+    protected Class[] getPreys() {
+        return PREYS;
+    }
 }

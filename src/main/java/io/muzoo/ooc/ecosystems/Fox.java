@@ -97,32 +97,36 @@ public class Fox extends Predator{
     }
 
     @Override
-    public int getBreedingAge() {
+    protected int getBreedingAge() {
         return BREEDING_AGE;
     }
 
     @Override
-    public int getMaxAge() {
+    protected int getMaxAge() {
         return MAX_AGE;
     }
 
     @Override
-    public double getBreedingProbability() {
+    protected double getBreedingProbability() {
         return BREEDING_PROBABILITY;
     }
 
     @Override
-    public int getMaxLitterSize() {
+    protected int getMaxLitterSize() {
         return MAX_LITTER_SIZE;
     }
 
     @Override
-    public Random getRand() {
+    protected Random getRand() {
         return rand;
     }
 
-    public Animal getNewBornAnimal(Location location) {
+    protected Animal getNewBornAnimal(Location location) {
         return new Fox(location, false);
     }
 
+    @Override
+    protected Class[] getPreys() {
+        return PREYS;
+    }
 }
