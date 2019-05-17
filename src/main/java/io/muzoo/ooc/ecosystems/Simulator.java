@@ -22,11 +22,14 @@ public class Simulator {
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 50;
 
+    // The probability that a hunter will be created in any given grid position.
+    private static final double HUNTER_CREATION_PROBABILITY = 0.005;
 
-    // The list of animals in the field
-    private List animals;
-    // The list of animals just born
-    private List newAnimals;
+
+    // The list of actors in the field
+    private List actors;
+    // The list of actors just born
+    private List newActors;
     // The current state of the field.
     private Field field;
     // A second field, used to build the next stage of the simulation.
@@ -59,8 +62,8 @@ public class Simulator {
             depth = DEFAULT_DEPTH;
             width = DEFAULT_WIDTH;
         }
-        animals = new ArrayList<Animal>();
-        newAnimals = new ArrayList<Animal>();
+        actors = new ArrayList();
+        newActors = new ArrayList();
         field = new Field(depth, width);
         updatedField = new Field(depth, width);
         animalFactory = new AnimalFactory();
@@ -70,6 +73,7 @@ public class Simulator {
         view.setColor(Fox.class, Color.orange);
         view.setColor(Rabbit.class, Color.pink);
         view.setColor(Tiger.class, Color.red);
+        view.setColor(Hunter.class, Color.gray);
 
         // Setup a valid starting point.
         reset();
@@ -100,18 +104,18 @@ public class Simulator {
      */
     public void simulateOneStep() {
         step++;
-        newAnimals.clear();
+        newActors.clear();
 
-        // let all animals act
-        for (Iterator<Animal> iter = animals.iterator(); iter.hasNext(); ) {
-            Animal animal = iter.next();
-            animal.act(field, updatedField, newAnimals);
-            if(! animal.isAlive()) {
+        // let all actors act
+        for (Iterator iter = actors.iterator(); iter.hasNext(); ) {
+            Actor actor = (Actor) iter.next();
+            actor.act(field, updatedField, newActors);
+            if(! actor.isAlive()) {
                 iter.remove();
             }
         }
         // add new born animals to the list of animals
-        animals.addAll(newAnimals);
+        actors.addAll(newActors);
 
         // Swap the field and updatedField at the end of the step.
         Field temp = field;
@@ -128,7 +132,7 @@ public class Simulator {
      */
     public void reset() {
         step = 0;
-        animals.clear();
+        actors.clear();
         field.clear();
         updatedField.clear();
         populate(field);
@@ -149,14 +153,19 @@ public class Simulator {
             for (int col = 0; col < field.getWidth(); col++) {
                 double creationProbability = rand.nextDouble();
                 Location loc = new Location(row, col);
-                Animal newAnimal = animalFactory.spawnAnimal(creationProbability, loc);
-                if (newAnimal != null) {
-                    animals.add(newAnimal);
-                    field.place(newAnimal, row, col);
+                Actor newActor = null;
+                if (creationProbability <= HUNTER_CREATION_PROBABILITY) {
+                    newActor = new Hunter(loc);
+                } else {
+                    newActor = animalFactory.spawnAnimal(creationProbability, loc);
+                }
+                if (newActor != null) {
+                    actors.add(newActor);
+                    field.place(newActor, row, col);
                 }
                 // else leave the location empty.
             }
         }
-        Collections.shuffle(animals);
+        Collections.shuffle(actors);
     }
 }
