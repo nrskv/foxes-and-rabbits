@@ -3,7 +3,7 @@ package io.muzoo.ooc.ecosystems;
 import java.util.List;
 import java.util.Random;
 
-abstract public class Animal extends Actor{
+abstract public class Animal extends Actor {
 
     // Individual characteristics (instance fields).
 
@@ -13,9 +13,10 @@ abstract public class Animal extends Actor{
     /**
      * Create a new animal. An animal may be created with age
      * zero (a new born) or with a random age.
+     *
      * @param location The location of the animal.
      */
-    public Animal(Location location, boolean randomAge){
+    public Animal(Location location, boolean randomAge) {
         super(location);
         age = 0;
         if (randomAge) {
@@ -26,7 +27,8 @@ abstract public class Animal extends Actor{
     // Getters and Setters
 
     /**
-     *  Get the animal's age.
+     * Get the animal's age.
+     *
      * @return The animal's age.
      */
     protected int getAge() {
@@ -35,6 +37,7 @@ abstract public class Animal extends Actor{
 
     /**
      * Set the animal's age.
+     *
      * @param age The age of the animal.
      */
     protected void setAge(int age) {
@@ -44,9 +47,13 @@ abstract public class Animal extends Actor{
     // Getter of the animal's static field
 
     abstract protected int getBreedingAge();
+
     abstract protected int getMaxAge();
+
     abstract protected double getBreedingProbability();
+
     abstract protected int getMaxLitterSize();
+
     abstract protected Random getRand();
 
     abstract protected Animal getNewBornAnimal(Location location);
@@ -90,17 +97,19 @@ abstract public class Animal extends Actor{
     protected void giveBirth(Field updatedField, List<Animal> newAnimals) {
         int births = breed();
         for (int b = 0; b < births; b++) {
-            Location loc = updatedField.randomAdjacentLocation(getLocation());
-            Animal newAnimal = getNewBornAnimal(loc);
-            newAnimals.add(newAnimal);
-            updatedField.place(newAnimal, loc);
+            Location loc = updatedField.freeAdjacentLocation(getLocation());
+            if (loc != null) {
+                Animal newAnimal = getNewBornAnimal(loc);
+                newAnimals.add(newAnimal);
+                updatedField.place(newAnimal, loc);
+            }
         }
     }
 
     /**
      * Tell the animal that it's dead
      */
-    protected void setDead(){
+    protected void setDead() {
         setAlive(false);
     }
 
