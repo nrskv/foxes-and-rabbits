@@ -65,7 +65,10 @@ public class Field {
      * @param location Where to place the animal.
      */
     public void place(Object animal, Location location) {
-        field[location.getRow()][location.getCol()] = animal;
+        if(field[location.getRow()][location.getCol()] == null) {
+            field[location.getRow()][location.getCol()] = animal;
+        }
+
     }
 
     /**
