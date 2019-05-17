@@ -11,7 +11,7 @@ import java.util.Random;
  * @author David J. Barnes and Michael Kolling
  * @version 2002.10.28
  */
-public class Fox extends Animal {
+public class Fox extends Predator{
     // Characteristics shared by all foxes (static fields).
 
     // The age at which a fox can start to breed.
@@ -33,9 +33,6 @@ public class Fox extends Animal {
 
     // Individual characteristics (instance fields).
 
-    // The fox's food level, which is increased by eating rabbits.
-    private int foodLevel;
-
     /**
      * Create a fox. A fox can be created as a new born (age zero
      * and not hungry) or with random age.
@@ -43,13 +40,7 @@ public class Fox extends Animal {
      * @param randomAge If true, the fox will have random age and hunger level.
      */
     public Fox(Location location, boolean randomAge) {
-        super(location, randomAge);
-        if (randomAge) {
-            foodLevel = rand.nextInt(RABBIT_FOOD_VALUE);
-        } else {
-            // leave age at 0
-            foodLevel = RABBIT_FOOD_VALUE;
-        }
+        super(location, randomAge, RABBIT_FOOD_VALUE);
     }
 
     /**
@@ -74,16 +65,6 @@ public class Fox extends Animal {
     }
 
     /**
-     * Make this fox more hungry. This could result in the fox's death.
-     */
-    private void incrementHunger() {
-        foodLevel--;
-        if (foodLevel <= 0) {
-            setDead();
-        }
-    }
-
-    /**
      * Tell the fox to look for rabbits adjacent to its current location.
      *
      * @param field    The field in which it must look.
@@ -100,7 +81,7 @@ public class Fox extends Animal {
                 Rabbit rabbit = (Rabbit) animal;
                 if (rabbit.isAlive()) {
                     rabbit.setDead();
-                    foodLevel = RABBIT_FOOD_VALUE;
+                    setFoodLevel(RABBIT_FOOD_VALUE);
                     return where;
                 }
             }
