@@ -9,7 +9,7 @@ public class ActorFactory {
     // The probability that a tiger will be created in any given grid position.
     private static final double TIGER_CREATION_PROBABILITY = 0.01;
     // The probability that a hunter will be created in any given grid position.
-    private static final double HUNTER_CREATION_PROBABILITY = 0.005;
+    private static final double HUNTER_CREATION_PROBABILITY = 0.003;
 
     public Actor spawnActor(double creationProbability, Location location) {
         if (creationProbability <= HUNTER_CREATION_PROBABILITY) {
