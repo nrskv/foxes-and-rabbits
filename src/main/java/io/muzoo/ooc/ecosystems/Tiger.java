@@ -66,36 +66,6 @@ public class Tiger extends Predator{
         }
     }
 
-    /**
-     * Tell the tiger to look for rabbits and foxes adjacent to its current location.
-     *
-     * @param field    The field in which it must look.
-     * @param location Where in the field it is located.
-     * @return Where food was found, or null if it wasn't.
-     */
-    private Location findFood(Field field, Location location) {
-        Iterator adjacentLocations = field.adjacentLocations(location);
-        while (adjacentLocations.hasNext()) {
-            Location where = (Location) adjacentLocations.next();
-            Object animal = field.getObjectAt(where);
-            if (animal instanceof Fox) {
-                Fox fox = (Fox) animal;
-                if (fox.isAlive()) {
-                    fox.setDead();
-                    setFoodLevel(FOX_FOOD_VALUE);
-                    return where;
-                }
-            } else if (animal instanceof Rabbit) {
-                Rabbit rabbit = (Rabbit) animal;
-                if (rabbit.isAlive()) {
-                    rabbit.setDead();
-                    setFoodLevel(RABBIT_FOOD_VALUE);
-                    return where;
-                }
-            }
-        }
-        return null;
-    }
 
     @Override
     protected Location findNewLocation(Field currentField, Field updatedField) {

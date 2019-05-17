@@ -1,6 +1,7 @@
 package io.muzoo.ooc.ecosystems;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 abstract public class Predator extends Animal{
 
@@ -24,6 +25,31 @@ abstract public class Predator extends Animal{
         } else {
             foodLevel = initialFoodValue;
         }
+    }
+
+
+    /**
+     * Tell the animal to look for preys adjacent to its current location.
+     *
+     * @param field    The field in which it must look.
+     * @param location Where in the field it is located.
+     * @return Where food was found, or null if it wasn't.
+     */
+    protected Location findFood(Field field, Location location) {
+        Iterator adjacentLocations = field.adjacentLocations(location);
+        while (adjacentLocations.hasNext()) {
+            Location where = (Location) adjacentLocations.next();
+            Object animal = field.getObjectAt(where);
+            for (Class prey : getPreys()){
+                if (prey.isInstance(animal)){
+                    Animal food = (Animal) animal;
+                    food.setDead();
+                    foodLevel = getFoodValueMap().get(prey);
+                    return where;
+                }
+            }
+        }
+        return null;
     }
 
     protected void incrementHunger() {
