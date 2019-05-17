@@ -9,7 +9,7 @@ public class AnimalFactory {
     // The probability that a tiger will be created in any given grid position.
     private static final double TIGER_CREATION_PROBABILITY = 0.01;
 
-    public Animal spawnAnimal(int creationProbability, Location location) {
+    public Animal spawnAnimal(double creationProbability, Location location) {
         if (creationProbability <= TIGER_CREATION_PROBABILITY) {
             return new Tiger(location, true);
         } else if (creationProbability <= FOX_CREATION_PROBABILITY) {

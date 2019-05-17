@@ -21,12 +21,7 @@ public class Simulator {
     private static final int DEFAULT_WIDTH = 50;
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 50;
-    // The probability that a fox will be created in any given grid position.
-    private static final double FOX_CREATION_PROBABILITY = 0.03;
-    // The probability that a rabbit will be created in any given grid position.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.09;
-    // The probability that a tiger will be created in any given grid position.
-    private static final double TIGER_CREATION_PROBABILITY = 0.01;
+
 
     // The list of animals in the field
     private List<Animal> animals;
@@ -40,6 +35,9 @@ public class Simulator {
     private int step;
     // A graphical view of the simulation.
     private SimulatorView view;
+
+    // The animal factory
+    private AnimalFactory animalFactory;
 
     /**
      * Construct a simulation field with default size.
@@ -65,6 +63,7 @@ public class Simulator {
         newAnimals = new ArrayList<Animal>();
         field = new Field(depth, width);
         updatedField = new Field(depth, width);
+        animalFactory = new AnimalFactory();
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
@@ -148,18 +147,12 @@ public class Simulator {
         field.clear();
         for (int row = 0; row < field.getDepth(); row++) {
             for (int col = 0; col < field.getWidth(); col++) {
-                if (rand.nextDouble() <= TIGER_CREATION_PROBABILITY){
-                    Tiger tiger = new Tiger(new Location(row, col), true);
-                    animals.add(tiger);
-                    field.place(tiger, row, col);
-                } else if (rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
-                    Fox fox = new Fox(new Location(row, col), true);
-                    animals.add(fox);
-                    field.place(fox, row, col);
-                } else if (rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
-                    Rabbit rabbit = new Rabbit(new Location(row, col),true);
-                    animals.add(rabbit);
-                    field.place(rabbit, row, col);
+                double creationProbability = rand.nextDouble();
+                Location loc = new Location(row, col);
+                Animal newAnimal = animalFactory.spawnAnimal(creationProbability, loc);
+                if (newAnimal != null) {
+                    animals.add(newAnimal);
+                    field.place(newAnimal, row, col);
                 }
                 // else leave the location empty.
             }
