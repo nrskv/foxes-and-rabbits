@@ -31,8 +31,6 @@ public class Fox extends Predator{
     // Array of the fox's prey.
     protected static final Class[] PREYS = {Rabbit.class};
 
-    // Individual characteristics (instance fields).
-
     /**
      * Create a fox. A fox can be created as a new born (age zero
      * and not hungry) or with random age.

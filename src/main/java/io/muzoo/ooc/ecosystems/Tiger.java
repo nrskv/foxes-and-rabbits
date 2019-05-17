@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-public class Tiger extends Animal{
+public class Tiger extends Predator{
     // Characteristics shared by all tigers (static fields).
 
     // The age at which a tiger can start to breed.
@@ -27,11 +27,6 @@ public class Tiger extends Animal{
     // Array of the tiger's prey.
     private static final Class[] PREYS = {Rabbit.class, Fox.class};
 
-    // Individual characteristics (instance fields).
-
-    // The tiger's food level, which is increased by eating rabbits.
-    private int foodLevel;
-
     /**
      * Create a tiger. A tiger can be created as a new born (age zero
      * and not hungry) or with random age.
@@ -39,12 +34,7 @@ public class Tiger extends Animal{
      * @param randomAge If true, the tiger will have random age and hunger level.
      */
     public Tiger(Location location, boolean randomAge) {
-        super(location, randomAge);
-        if (randomAge) {
-            foodLevel = rand.nextInt(RABBIT_FOOD_VALUE);
-        } else {
-            foodLevel = RABBIT_FOOD_VALUE;
-        }
+        super(location, randomAge, RABBIT_FOOD_VALUE);
     }
 
     /**
@@ -70,16 +60,6 @@ public class Tiger extends Animal{
     }
 
     /**
-     * Make this tiger more hungry. This could result in the tiger's death.
-     */
-    private void incrementHunger() {
-        foodLevel--;
-        if (foodLevel <= 0) {
-            setDead();
-        }
-    }
-
-    /**
      * Tell the tiger to look for rabbits and foxes adjacent to its current location.
      *
      * @param field    The field in which it must look.
@@ -95,14 +75,14 @@ public class Tiger extends Animal{
                 Fox fox = (Fox) animal;
                 if (fox.isAlive()) {
                     fox.setDead();
-                    foodLevel = FOX_FOOD_VALUE;
+                    setFoodLevel(FOX_FOOD_VALUE);
                     return where;
                 }
             } else if (animal instanceof Rabbit) {
                 Rabbit rabbit = (Rabbit) animal;
                 if (rabbit.isAlive()) {
                     rabbit.setDead();
-                    foodLevel = RABBIT_FOOD_VALUE;
+                    setFoodLevel(RABBIT_FOOD_VALUE);
                     return where;
                 }
             }
