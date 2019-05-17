@@ -12,22 +12,14 @@ abstract public class Actor {
         alive = true;
     }
 
-    /**
-     * Get the animal's location.
-     * @return The animal's location.
-     */
-    protected Location getLocation() {
-        return location;
-    }
 
     /**
-     * Set the actor's location.
-     *
-     * @param location The actor's location.
+     * This is what the actor do most of the time
+     * @param currentField The field currently occupied
+     * @param updatedField The field to transfer to
+     * @param newActors A list to add newly born actors to
      */
-    protected void setLocation(Location location){
-        this.location = location;
-    }
+    public abstract void act(Field currentField, Field updatedField, List newActors);
 
     /**
      * Move the actor to new location.
@@ -47,7 +39,6 @@ abstract public class Actor {
 
     abstract protected Location findNewLocation(Field currentField, Field updatedField);
 
-
     /**
      * Check whether the animal is alive or not.
      *
@@ -64,6 +55,23 @@ abstract public class Actor {
      */
     protected void setDead(){
         alive = false;
+    }
+
+    /**
+     * Get the animal's location.
+     * @return The animal's location.
+     */
+    protected Location getLocation() {
+        return location;
+    }
+
+    /**
+     * Set the actor's location.
+     *
+     * @param location The actor's location.
+     */
+    protected void setLocation(Location location){
+        this.location = location;
     }
 
 

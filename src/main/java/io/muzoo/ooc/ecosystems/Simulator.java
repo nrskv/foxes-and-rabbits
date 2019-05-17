@@ -24,9 +24,9 @@ public class Simulator {
 
 
     // The list of animals in the field
-    private List<Animal> animals;
+    private List animals;
     // The list of animals just born
-    private List<Animal> newAnimals;
+    private List newAnimals;
     // The current state of the field.
     private Field field;
     // A second field, used to build the next stage of the simulation.

@@ -23,16 +23,7 @@ abstract public class Animal extends Actor{
         }
     }
 
-    /**
-     * This is what the animal do most of the time
-     * @param currentField The field currently occupied
-     * @param updatedField The field to transfer to
-     * @param newAnimals A list to add newly born animals to
-     */
-    public abstract void act(Field currentField, Field updatedField, List<Animal> newAnimals);
-
-
-
+    // Getters and Setters
 
     /**
      *  Get the animal's age.
@@ -73,7 +64,6 @@ abstract public class Animal extends Actor{
         }
     }
 
-
     /**
      * Generate a number representing the number of births,
      * if it can breed.
@@ -96,8 +86,6 @@ abstract public class Animal extends Actor{
     private boolean canBreed() {
         return age >= getBreedingAge();
     }
-
-    // What do animal do?
 
     protected void giveBirth(Field updatedField, List<Animal> newAnimals) {
         int births = breed();

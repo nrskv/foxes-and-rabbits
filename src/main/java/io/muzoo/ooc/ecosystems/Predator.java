@@ -28,7 +28,7 @@ abstract public class Predator extends Animal{
         }
     }
 
-    public void act(Field currentField, Field updatedField, List<Animal> newAnimals) {
+    public void act(Field currentField, Field updatedField, List newAnimals) {
         incrementAge();
         incrementHunger();
         if (isAlive()) {

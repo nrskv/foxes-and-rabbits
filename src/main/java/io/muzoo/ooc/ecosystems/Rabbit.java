@@ -43,7 +43,7 @@ public class Rabbit extends Animal{
      * @param updatedField The field to transfer to.
      * @param newAnimals   A list to add newly born rabbits to.
      */
-    public void act(Field currentField, Field updatedField, List<Animal> newAnimals) {
+    public void act(Field currentField, Field updatedField, List newAnimals) {
         incrementAge();
         if (isAlive()) {
             giveBirth(updatedField, newAnimals);
