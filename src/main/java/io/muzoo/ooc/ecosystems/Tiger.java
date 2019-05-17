@@ -66,16 +66,6 @@ public class Tiger extends Predator{
         }
     }
 
-
-    @Override
-    protected Location findNewLocation(Field currentField, Field updatedField) {
-        Location newLocation = findFood(currentField, getLocation());
-        if (newLocation == null) {  // no food found - move randomly
-            newLocation = updatedField.freeAdjacentLocation(getLocation());
-        }
-        return newLocation;
-    }
-
     @Override
     protected int getBreedingAge() {
         return BREEDING_AGE;
