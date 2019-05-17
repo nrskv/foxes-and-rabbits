@@ -51,10 +51,10 @@ abstract public class Actor {
     // The getters and setters of the instance fields
 
     /**
-     * Tell the animal that it's dead
+     * Tell the animal that it's alive or dead
      */
-    protected void setDead(){
-        alive = false;
+    protected void setAlive(boolean alive){
+        this.alive = alive;
     }
 
     /**

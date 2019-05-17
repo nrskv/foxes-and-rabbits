@@ -97,4 +97,11 @@ abstract public class Animal extends Actor{
         }
     }
 
+    /**
+     * Tell the animal that it's dead
+     */
+    protected void setDead(){
+        setAlive(false);
+    }
+
 }
