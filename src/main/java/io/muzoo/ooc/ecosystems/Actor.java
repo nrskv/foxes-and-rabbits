@@ -45,5 +45,26 @@ abstract public class Actor {
         }
     }
 
+    abstract protected Location findNewLocation(Field currentField, Field updatedField);
+
+
+    /**
+     * Check whether the animal is alive or not.
+     *
+     * @return true if the animal is still alive.
+     */
+    protected boolean isAlive() {
+        return alive;
+    }
+
+    // The getters and setters of the instance fields
+
+    /**
+     * Tell the animal that it's dead
+     */
+    protected void setDead(){
+        alive = false;
+    }
+
 
 }

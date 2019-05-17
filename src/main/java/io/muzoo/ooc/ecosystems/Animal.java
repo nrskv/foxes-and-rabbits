@@ -3,14 +3,10 @@ package io.muzoo.ooc.ecosystems;
 import java.util.List;
 import java.util.Random;
 
-abstract public class Animal {
+abstract public class Animal extends Actor{
 
     // Individual characteristics (instance fields).
 
-    // The animal's location;
-    private Location location;
-    // Whether the animal is alive or not.
-    private boolean alive;
     // The animal's age.
     private int age;
 
@@ -20,8 +16,7 @@ abstract public class Animal {
      * @param location The location of the animal.
      */
     public Animal(Location location, boolean randomAge){
-        setLocation(location);
-        alive = true;
+        super(location);
         age = 0;
         if (randomAge) {
             age = getRand().nextInt(getMaxAge());
@@ -37,40 +32,7 @@ abstract public class Animal {
     public abstract void act(Field currentField, Field updatedField, List<Animal> newAnimals);
 
 
-    // The getters and setters of the instance fields
 
-    /**
-     * Get the animal's location.
-     * @return The animal's location.
-     */
-    protected Location getLocation() {
-        return location;
-    }
-
-    /**
-     * Set the animal's location.
-     *
-     * @param location The animal's location.
-     */
-    protected void setLocation(Location location){
-        this.location = location;
-    }
-
-    /**
-     * Check whether the animal is alive or not.
-     *
-     * @return true if the animal is still alive.
-     */
-    protected boolean isAlive() {
-        return alive;
-    }
-
-    /**
-     * Tell the animal that it's dead
-     */
-    protected void setDead(){
-        alive = false;
-    }
 
     /**
      *  Get the animal's age.
@@ -107,7 +69,7 @@ abstract public class Animal {
     protected void incrementAge() {
         age++;
         if (getAge() > getMaxAge()) {
-            alive = false;
+            setDead();
         }
     }
 
@@ -137,28 +99,10 @@ abstract public class Animal {
 
     // What do animal do?
 
-    abstract protected Location findNewLocation(Field currentField, Field updatedField);
-
-    /**
-     * Move the animal to new location.
-     * @param updatedField The field to transfer to.
-     * @param newLocation The new location.
-     */
-    protected void move(Field updatedField, Location newLocation){
-        // Only transfer to the updated field if there was a free location
-        if (newLocation != null) {
-            location = newLocation;
-            updatedField.place(this, newLocation);
-        } else {
-            // can neither move nor stay - overcrowding - all locations taken
-            alive = false;
-        }
-    }
-
     protected void giveBirth(Field updatedField, List<Animal> newAnimals) {
         int births = breed();
         for (int b = 0; b < births; b++) {
-            Location loc = updatedField.randomAdjacentLocation(location);
+            Location loc = updatedField.randomAdjacentLocation(getLocation());
             Animal newAnimal = getNewBornAnimal(loc);
             newAnimals.add(newAnimal);
             updatedField.place(newAnimal, loc);
