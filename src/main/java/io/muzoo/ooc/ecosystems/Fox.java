@@ -11,7 +11,7 @@ import java.util.Random;
  * @author David J. Barnes and Michael Kolling
  * @version 2002.10.28
  */
-public class Fox extends Animal{
+public class Fox extends Animal {
     // Characteristics shared by all foxes (static fields).
 
     // The age at which a fox can start to breed.
@@ -29,7 +29,7 @@ public class Fox extends Animal{
     private static final Random rand = new Random();
 
     // Array of the fox's prey.
-    private static final Class[] PREYS = {Rabbit.class};
+    protected static final Class[] PREYS = {Rabbit.class};
 
     // Individual characteristics (instance fields).
 
