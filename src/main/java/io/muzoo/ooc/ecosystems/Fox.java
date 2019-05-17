@@ -28,6 +28,9 @@ public class Fox extends Animal{
     // A shared random number generator to control breeding.
     private static final Random rand = new Random();
 
+    // Array of the fox's prey.
+    private static final Class[] PREYS = {Rabbit.class};
+
     // Individual characteristics (instance fields).
 
     // The fox's food level, which is increased by eating rabbits.
