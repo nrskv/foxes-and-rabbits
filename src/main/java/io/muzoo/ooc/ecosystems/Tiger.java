@@ -1,5 +1,6 @@
 package io.muzoo.ooc.ecosystems;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -26,6 +27,12 @@ public class Tiger extends Predator{
 
     // Array of the tiger's prey.
     private static final Class[] PREYS = {Rabbit.class, Fox.class};
+    private static final HashMap<Class, Integer> FOOD_VALUE_MAP = new HashMap<Class, Integer>(){
+        {
+            put(Rabbit.class, RABBIT_FOOD_VALUE);
+            put(Fox.class, FOX_FOOD_VALUE);
+        }
+    };
 
     /**
      * Create a tiger. A tiger can be created as a new born (age zero
@@ -132,5 +139,10 @@ public class Tiger extends Predator{
     @Override
     protected Class[] getPreys() {
         return PREYS;
+    }
+
+    @Override
+    protected HashMap<Class, Integer> getFoodValueMap() {
+        return FOOD_VALUE_MAP;
     }
 }

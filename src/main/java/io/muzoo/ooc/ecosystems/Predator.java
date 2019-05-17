@@ -1,5 +1,7 @@
 package io.muzoo.ooc.ecosystems;
 
+import java.util.HashMap;
+
 abstract public class Predator extends Animal{
 
     // Individual characteristics (instance fields).
@@ -40,5 +42,6 @@ abstract public class Predator extends Animal{
     }
 
     abstract protected Class[] getPreys();
+    abstract protected HashMap<Class, Integer> getFoodValueMap();
 
 }
