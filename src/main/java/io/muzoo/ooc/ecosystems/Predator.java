@@ -2,6 +2,7 @@ package io.muzoo.ooc.ecosystems;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 abstract public class Predator extends Animal{
 
@@ -24,6 +25,18 @@ abstract public class Predator extends Animal{
             foodLevel = getRand().nextInt(initialFoodValue);
         } else {
             foodLevel = initialFoodValue;
+        }
+    }
+
+    public void act(Field currentField, Field updatedField, List<Animal> newAnimals) {
+        incrementAge();
+        incrementHunger();
+        if (isAlive()) {
+            // New foxes are born into adjacent locations.
+            giveBirth(updatedField, newAnimals);
+            // Move towards the source of food if found.
+            Location newLocation = findNewLocation(currentField, updatedField);
+            move(updatedField, newLocation);
         }
     }
 

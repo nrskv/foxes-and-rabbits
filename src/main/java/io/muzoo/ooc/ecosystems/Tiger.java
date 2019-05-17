@@ -44,28 +44,6 @@ public class Tiger extends Predator{
         super(location, randomAge, RABBIT_FOOD_VALUE);
     }
 
-    /**
-     * This is what the tiger do most of the time: it hunts for
-     * rabbits and foxes. In the process, it might breed, die of hunger,
-     * or die of old age.
-     *
-     * @param currentField The field currently occupied
-     * @param updatedField The field to transfer to
-     * @param newAnimals      A list to add newly born animals to
-     */
-    @Override
-    public void act(Field currentField, Field updatedField, List<Animal> newAnimals) {
-        incrementAge();
-        incrementHunger();
-        if (isAlive()) {
-            // New tigers are born into adjacent locations.
-            giveBirth(updatedField, newAnimals);
-            // Move towards the source of food if found.
-            Location newLocation = findNewLocation(currentField, updatedField);
-            move(updatedField, newLocation);
-        }
-    }
-
     @Override
     protected int getBreedingAge() {
         return BREEDING_AGE;
